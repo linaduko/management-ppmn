@@ -3,7 +3,16 @@ FROM python:3.9.16-alpine
 ENV PYTHONDONTWRITEBYTECODE = 1 \
      PYTHONUNBUFFERD = 1
 
-RUN apk update && apk add --no_cache --no_cache_dir --virtual bash gcc musl-dev linux-headers jpeg-dev zlib-dev mariadb-dev libffi-dev
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache bash \
+    && apk add --no-cache gcc \
+    && apk add --no-cache musl-dev \ 
+    && apk add --no-cache linux-headers \
+    && apk add --no-cache jpeg-dev \
+    && apk add --no-cache zlib-dev \
+    && apk add --no-cache mariadb-dev \
+    && apk add --no-cache libffi-dev
 
 COPY requirements.txt /requirements.txt
 RUN pip install --upgrade pip
